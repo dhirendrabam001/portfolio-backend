@@ -26,7 +26,4 @@ const userDataRoutes = require("./routes/userDataRoutes");
 // API ENDPOINT
 app.use("/api/user", userDataRoutes);
 
-app.listen(PORT, () => {
-  connectDB();
-  console.log(`Server Is Running Port Number ${PORT}`);
-});
+connectDB();
