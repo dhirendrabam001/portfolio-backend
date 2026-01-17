@@ -6,7 +6,7 @@ require("dotenv").config();
 const cors = require("cors");
 const connectDB = require("./config/connection");
 
-const PORT = process.env.PORT;
+// const PORT = process.env.PORT;
 
 // CORS USED
 app.use(
