@@ -14,7 +14,8 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://portfolio-frontend-three-blond.vercel.app",
+      "https://www.dhirendrabam.com.np",
+      "https://dhirendrabam.com.np",
     ],
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
