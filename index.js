@@ -12,7 +12,11 @@ const PORT = process.env.PORT || 3000;
 // CORS USED
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: [
+      "http://localhost:5173",
+      "https://portfolio-frontend-three-blond.vercel.app/",
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     credentials: true,
   })
 );
