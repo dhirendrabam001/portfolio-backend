@@ -40,6 +40,4 @@ app.get("/", (req, res) => {
 // API ENDPOINT
 app.use("/api/user", userDataRoutes);
 
-connectDB();
-
 module.exports = serverless(app);
