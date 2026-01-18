@@ -5,7 +5,7 @@ const app = express();
 require("dotenv").config();
 const cors = require("cors");
 const connectDB = require("./config/connection");
-const serverless = require("serverless-http");
+// const serverless = require("serverless-http");
 
 const PORT = process.env.PORT || 3000;
 
@@ -20,16 +20,6 @@ app.use(
 // MIDDLEWARE
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-// ✅ connect DB ONCE (VERY IMPORTANT)
-let isConnected = false;
-async function dbConnectOnce() {
-  if (!isConnected) {
-    await connectDB();
-    isConnected = true;
-    console.log("MongoDB connected");
-  }
-}
-dbConnectOnce();
 
 // ROUTES
 const userDataRoutes = require("./routes/userDataRoutes");
@@ -40,4 +30,9 @@ app.get("/", (req, res) => {
 // API ENDPOINT
 app.use("/api/user", userDataRoutes);
 
-module.exports = serverless(app);
+app.listen(PORT, () => {
+  connectDB();
+  console.log(`Server Is Running Port Number:${PORT}`);
+});
+
+// module.exports = serverless(app);
