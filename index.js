@@ -6,7 +6,7 @@ require("dotenv").config();
 const cors = require("cors");
 const connectDB = require("./config/connection");
 
-// const PORT = process.env.PORT;
+const PORT = process.env.PORT || 3000;
 
 // CORS USED
 app.use(
@@ -19,11 +19,27 @@ app.use(
 // MIDDLEWARE
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// ✅ connect DB ONCE (VERY IMPORTANT)
+let isConnected = false;
+async function dbConnectOnce() {
+  if (!isConnected) {
+    await connectDB();
+    isConnected = true;
+    console.log("MongoDB connected");
+  }
+}
+dbConnectOnce();
 
 // ROUTES
 const userDataRoutes = require("./routes/userDataRoutes");
+app.get("/", (req, res) => {
+  res.send("Backend running on Vercel 🚀");
+});
 
 // API ENDPOINT
 app.use("/api/user", userDataRoutes);
 
-connectDB();
+app.listen(PORT, () => {
+  connectDB();
+  console.log(`Server Is Running Port Number${PORT}`);
+});
